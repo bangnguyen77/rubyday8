@@ -1,0 +1,78 @@
+<h1><%= @contact.first_name %> <%= @contact.first_name %></h1>
+<h1><%= @contact.job_title %></h1>
+<h1><%= @contact.company %></h1>
+<div class="row">
+  <div class="col-md-6">
+    <% if @contact.phone.length > 0 %>
+    <h3>Phone numbers:</h3>
+    <ul>
+      <% @contact.phone.each() do | phone | %>
+      <li><%= phone %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+    <% if @contact.email_addresses.length > 0 %>
+    <h3>Email addresses:</h3>
+    <ul>
+      <% @contact.email_addresses.each() do | email | %>
+      <li><%= email %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+    <% if @contact.mailing_addresses.length > 0 %>
+    <h3>Mailing addresses:</h3>
+    <ul>
+      <% @contact.mailing_addresses.each() do | address | %>
+      <li><strong><%= address.type.to_s.upcase() %> | </strong>Street: <%= address.street %>, City: <%= address.city %>, State: <%= address.state %>, Zipcode: <%= address.zipcode %></li>
+      <% end %>
+    </ul>
+    <% end %>
+
+  </div>
+  <div class="col-md-6">
+    <form action="/contacts/view/<%= @contact.id %>/mailing_address" method="post">
+      <div class="form-group">
+         <label for="street">Street:</label>
+         <input id="street" name="street" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="city">City:</label>
+         <input id="city" name="city" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="state">State</label>
+         <input id="state" name="state" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="zipcode">Zipcode:</label>
+         <input id="zipcode" name="zipcode" class="form-control" type="number">
+      </div>
+      <div class="form-group">
+         <label for="type">Type:</label>
+         <select class="form-control" name="type">
+           <option value="home">Home</option>
+           <option value="work">Work</option>
+         </select>
+      </div>
+      <button type="submit" class="btn-lg btn btn-primary">Add Address</button>
+    </form>
+
+    <form action="/contacts/view/<%= @contact.id %>/phone" method="post">
+      <div class="form-group">
+         <label for="phone">Phone numbers:</label>
+         <input id="phone" name="phone" class="form-control" type="text">
+      </div>
+      <button type="submit" class="btn-lg btn btn-primary">Add Phone</button>
+    </form>
+
+    <form action="/contacts/view/<%= @contact.id %>/email" method="post">
+      <div class="form-group">
+         <label for="email">Email address:</label>
+         <input id="email" name="email" class="form-control" type="text">
+      </div>
+      <button type="submit" class="btn-lg btn btn-primary">Add Email:</button>
+    </form>
+  </div>
+</div>
