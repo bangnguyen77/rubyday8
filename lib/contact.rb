@@ -33,8 +33,8 @@ class Contact
     @mailing_addresses.push(address) unless @mailing_addresses.include?(address)
   end
 
-  define_method(:add_phone) do | number |
-    @phone.push(number) unless @phone.include?(number)
+  define_method(:add_phone) do | phone |
+    @phone.push(phone) unless @phone.include?(phone)
   end
 
   define_method(:add_email) do | address |

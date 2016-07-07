@@ -4,6 +4,8 @@ require('./lib/dealerships')
 require('./lib/vehicle')
 require('./lib/contact')
 require('./lib/address')
+require('./lib/phone')
+require('./lib/email')
 
 
 also_reload('lib/**/*.rb')
@@ -87,8 +89,7 @@ end
 post('/contacts/view/:contact/phone') do
   @page_title = "contacts"
   contact = Contact.find(params['contact'].to_i)
-  phone = params.fetch('phone')
-  contact.add_phone(phone)
+  contact.add_phone(Phone.new({:number => params.fetch('phone'), :type => params.fetch('phone_type')}))
   contact.save()
   redirect to("/contacts/view/#{params['contact']}")
 end
@@ -97,7 +98,7 @@ post('/contacts/view/:contact/email') do
   @page_title = "contacts"
   contact = Contact.find(params['contact'].to_i)
   email = params.fetch('email')
-  contact.add_email(email)
+  contact.add_email(Email.new({:address => params.fetch('email'), :type => params.fetch('email_type')}))
   contact.save()
   redirect to("/contacts/view/#{params['contact']}")
 end
