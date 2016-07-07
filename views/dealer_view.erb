@@ -1,0 +1,47 @@
+<h1><%= @dealer.name %></h1>
+<div class="row">
+  <div class="col-md-6">
+    <% if @dealer.cars.length > 0 %>
+    <ul>
+      <% @dealer.cars.each() do | car | %>
+      <li>Make: <%= car.make %>
+          Model: <%= car.model %>
+          Year: <%= car.year %>
+          Color: <%= car.color %>
+          Engine: <%= car.engine_size %>
+          Doors: <%= car.number_of_doors %>
+      </li>
+      <% end %>
+    </ul>
+    <% end %>
+  </div>
+  <div class="col-md-6">
+    <form action="/dealerships/view/<%= @dealer.id %>/add" method="post">
+      <div class="form-group">
+         <label for="make">Make</label>
+         <input id="make" name="make" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="model">Model</label>
+         <input id="model" name="model" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="year">Year</label>
+         <input id="year" name="year" class="form-control" type="number">
+      </div>
+      <div class="form-group">
+         <label for="color">Color</label>
+         <input id="color" name="color" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="engine_size">Engine Size</label>
+         <input id="engine_size" name="engine_size" class="form-control" type="text">
+      </div>
+      <div class="form-group">
+         <label for="number_of_doors">Number of Doors</label>
+         <input id="number_of_doors" name="number_of_doors" class="form-control" type="number">
+      </div>
+      <button type="submit" class="btn-lg btn btn-primary">Submit</button>
+    </form>
+  </div>
+</div>
